@@ -18,6 +18,7 @@ char *getlineAndTok(FILE *pFile)
 		word = token;
 		return (word);
 	}
-		free(line_buff);
+	free(line_buff);
+	exit(EXIT_SUCCESS);
 	return (NULL);
 }

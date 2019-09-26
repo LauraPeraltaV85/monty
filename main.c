@@ -42,9 +42,10 @@ int main(int argc, char **argv)
 	{
 		str = getlineAndTok(fd);
 		if (str == NULL)
-			break;
-		get_func(str, &head, linenum);
+			continue;
 		linenum++;
+		if (str)
+			get_func(str, &head, linenum);
 	}
 	free(fd);
 	free(str);

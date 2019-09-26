@@ -9,8 +9,17 @@ void _push(stack_t **stack, unsigned int line_number)
 {
 	stack_t *newnode;
 	char *n;
+	int i;
 
 	n = strtok(NULL, "\n\t\r ");
+	for (; n[i] != '\0'; i++)
+	{
+		if (!isdigit(n[i]) && n[i] != '-')
+		{
+			fprintf(stderr, "L%u: usage: push integer\n", line_number);
+			exit(EXIT_FAILURE);
+		}
+	}
 	if (n == NULL || (!isdigit(*n) && *n != '-'))
 	{
 		fprintf(stderr, "L%u: usage: push integer\n", line_number);
