@@ -15,6 +15,8 @@ void get_func(char *str, stack_t **stack, unsigned int line_number)
 		{"pint", _pint},
 		{"pop", _pop},
 		{"swap", _swap},
+		{"add", _add},
+		{"nop", _nop},
 		{NULL, NULL}
 	};
 	while (option[idx].opcode != NULL)
