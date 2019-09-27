@@ -12,6 +12,7 @@ void get_func(char *str, stack_t **stack, unsigned int line_number)
 	instruction_t option[] = {
 		{"push", _push},
 		{"pall", _pall},
+		{"pint", _pint},
 		{NULL, NULL}
 	};
 	while (option[idx].opcode != NULL)
@@ -25,7 +26,7 @@ void get_func(char *str, stack_t **stack, unsigned int line_number)
 	}
 	if (option[idx].opcode == NULL)
 	{
-		fprintf(stderr, "L%d: unknown instruction %s", line_number, str);
+		fprintf(stderr, "L%d: unknown instruction %s\n", line_number, str);
 		exit(EXIT_FAILURE);
 	}
 }
