@@ -1,3 +1,4 @@
+#define GLOBALS
 #include "monty.h"
 
 /**
@@ -8,16 +9,14 @@
  */
 FILE *openfd(const char *argv, const char *mode)
 {
-	FILE *fd;
 
-	fd = fopen(argv, mode);
-	if (fd == NULL)
+	f.fd = fopen(argv, mode);
+	if (f.fd == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv);
-		free(fd);
 		exit(EXIT_FAILURE);
 	}
-	return (fd);
+	return (f.fd);
 }
 
 /**
@@ -29,27 +28,28 @@ FILE *openfd(const char *argv, const char *mode)
 int main(int argc, char **argv)
 {
 	unsigned int linenum = 1;
-	char *str = NULL;
 	stack_t *head = NULL;
-	FILE *fd;
 
 	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-	fd = openfd(argv[1], "r");
-	while (fd != NULL)
+	f.str = NULL;
+	f.fd = openfd(argv[1], "r");
+	f.status = 1;
+	while (f.status)
 	{
-		str = getlineAndTok(fd);
-		if (str == NULL)
+		f.str = getlineAndTok();
+		if (f.str == NULL)
 			continue;
 		linenum++;
-		if (str)
-			get_func(str, &head, linenum);
+		if (f.str)
+			get_func(&head, linenum);
+		free(f.str);
 	}
-	free(fd);
-	free(str);
+	free(f.line_buff);
 	free_dlistint(head);
+	fclose(f.fd);
 	return (0);
 }

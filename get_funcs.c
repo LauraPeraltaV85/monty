@@ -6,7 +6,7 @@
  * @line_number: line number in file
  * Return: 0
  */
-void get_func(char *str, stack_t **stack, unsigned int line_number)
+void get_func(stack_t **stack, unsigned int line_number)
 {
 	int idx = 0;
 	instruction_t option[] = {
@@ -21,7 +21,7 @@ void get_func(char *str, stack_t **stack, unsigned int line_number)
 	};
 	while (option[idx].opcode != NULL)
 	{
-		if (strcmp(str, option[idx].opcode) == 0)
+		if (strcmp(f.str, option[idx].opcode) == 0)
 		{
 			option[idx].f(stack, line_number);
 			return;
@@ -30,7 +30,11 @@ void get_func(char *str, stack_t **stack, unsigned int line_number)
 	}
 	if (option[idx].opcode == NULL)
 	{
-		fprintf(stderr, "L%d: unknown instruction %s\n", line_number, str);
+		fprintf(stderr, "L%d: unknown instruction %s\n", line_number, f.str);
+		free(stack);
+		free(f.str);
+		free(f.num);
+		fclose(f.fd);
 		exit(EXIT_FAILURE);
 	}
 }

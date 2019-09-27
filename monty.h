@@ -37,8 +37,8 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-void get_func(char *str, stack_t **stack, unsigned int line_number);
-char *getlineAndTok(FILE *pFile);
+void get_func(stack_t **stack, unsigned int line_number);
+char *getlineAndTok(void);
 void _push(stack_t **stack, unsigned int line_number);
 void _pall(stack_t **stack, unsigned int line_number);
 void _pint(stack_t **stack, unsigned int line_number);
@@ -47,5 +47,20 @@ void _swap(stack_t **stack, unsigned int line_number);
 void _add(stack_t **stack, unsigned int line_number);
 void _nop(stack_t **stack, unsigned int line_number);
 void free_dlistint(stack_t *head);
+
+typedef struct gbl_frees_s
+{
+	FILE *fd;
+	char *str;
+	char *num;
+	char *line_buff;
+	int status;
+} gbl_frees_t;
+
+#ifdef GLOBALS
+gbl_frees_t f;
+#else
+extern gbl_frees_t f;
+#endif
 
 #endif /**MONTY*/
