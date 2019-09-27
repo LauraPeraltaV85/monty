@@ -93,6 +93,11 @@ void _pop(stack_t **stack, unsigned int line_number)
 	free(temp);
 }
 
+/**
+ *_swap - swaps the top two elements of the stack in a linked list
+ *@stack: pointer to first element of the list
+ *@line_number: number of the line in file
+ */
 void _swap(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp;
