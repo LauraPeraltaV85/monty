@@ -36,7 +36,6 @@ int main(int argc, char **argv)
 	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
-		free(fd);
 		exit(EXIT_FAILURE);
 	}
 	fd = openfd(argv[1], "r");
@@ -51,5 +50,6 @@ int main(int argc, char **argv)
 	}
 	free(fd);
 	free(str);
+	free_dlistint(head);
 	return (0);
 }

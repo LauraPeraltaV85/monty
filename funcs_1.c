@@ -17,18 +17,22 @@ void _push(stack_t **stack, unsigned int line_number)
 		if (!isdigit(n[i]) && n[i] != '-')
 		{
 			fprintf(stderr, "L%u: usage: push integer\n", line_number);
+			free(stack);
 			exit(EXIT_FAILURE);
 		}
 	}
 	if (n == NULL || (!isdigit(*n) && *n != '-'))
 	{
 		fprintf(stderr, "L%u: usage: push integer\n", line_number);
+		free(stack);
 		exit(EXIT_FAILURE);
 	}
 	newnode = malloc(sizeof(stack_t));
 	if (newnode == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed");
+		free(newnode);
+		free(stack);
 		exit(EXIT_FAILURE);
 	}
 	newnode->n = atoi(n);
@@ -57,7 +61,7 @@ void _pall(stack_t **stack, __attribute__((unused))unsigned int line_number)
 }
 
 /**
- *_pall - prints the value at the top of the stack in a linked list
+ *_pint - prints the value at the top of the stack in a linked list
  *@stack: pointer to first element of the list
  *@line_number: number of the line in file
  */
@@ -68,6 +72,7 @@ void _pint(stack_t **stack, unsigned int line_number)
 	if (*stack == NULL)
 	{
 		fprintf(stderr, "L%u: can't pint, stack empty", line_number);
+		free(stack);
 		exit(EXIT_FAILURE);
 	}
 	printf("%d\n", h->n);
@@ -81,11 +86,11 @@ void _pint(stack_t **stack, unsigned int line_number)
 void _pop(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp;
-	/**int temp2;*/
 
 	if (*stack == NULL)
 	{
 		fprintf(stderr, "L%u: can't pop, stack empty", line_number);
+		free(stack);
 		exit(EXIT_FAILURE);
 	}
 	temp = *stack;
@@ -105,6 +110,7 @@ void _swap(stack_t **stack, unsigned int line_number)
 	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
 	{
 		fprintf(stderr, "L%u: can't pop, stack empty", line_number);
+		free(stack);
 		exit(EXIT_FAILURE);
 	}
 	temp = (*stack)->next;
