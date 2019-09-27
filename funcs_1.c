@@ -72,3 +72,32 @@ void _pint(stack_t **stack, unsigned int line_number)
 	}
 	printf("%d\n", h->n);
 }
+
+/**
+ *_pop - removes the top element of the stack in a linked list
+ *@stack: pointer to first element of the list
+ *@line_number: number of the line in file
+ */
+void _pop(stack_t **stack, unsigned int line_number)
+{
+	stack_t *temp;
+	/**int temp2;*/
+
+	if (*stack == NULL)
+	{
+		fprintf(stderr, "L%u: can't pop, stack empty", line_number);
+		exit(EXIT_FAILURE);
+	}
+	/**(*stack)->n;*/
+	temp = *stack;
+	*stack = (*stack)->next;
+	free(temp);
+}
+
+
+
+
+
+
+
+
