@@ -14,6 +14,7 @@ FILE *openfd(const char *argv, const char *mode)
 	if (fd == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv);
+		free(fd);
 		exit(EXIT_FAILURE);
 	}
 	return (fd);
@@ -35,6 +36,7 @@ int main(int argc, char **argv)
 	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
+		free(fd);
 		exit(EXIT_FAILURE);
 	}
 	fd = openfd(argv[1], "r");
